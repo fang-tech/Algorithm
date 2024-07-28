@@ -1,2 +1,2 @@
 # Algorithm
-Document the studying process of Algorithm
+- Document the studying process of Algorithm
