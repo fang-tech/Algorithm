@@ -14,7 +14,7 @@
 
 - 启动浏览器, 登录面板
 
-### 2. 搭建站点 (vless+vision)
+### 2.1 搭建站点 (vless+vision)
 
 - 协议选择 vless
 
@@ -47,9 +47,19 @@
 
 - 配置完成, 复制url,  在v2rayn中导入, 测试延迟, 配置成功
 
-## 配置Ngixn反向代理
+- 莫名出现了问题, 怀疑式v2rayN的问题
 
-### 安装Ngixn
+
+## 2.2 搭建站点 (vmess)
+
+- 协议选择vmess
+- 添加用户, 将id的第一段复制到路径
+- 网络选择ws
+- 配置成功
+
+## 配置Nginx反向代理
+
+### 安装Nginx
 
 1. 安装Ngixn
 
@@ -62,4 +72,8 @@
    sudo nano /etc/nginx/sites-available/your_domain
    ```
 
-   
+
+3. 反向代理配置失败, 未完全配置完, 其中碰到的问题有
+   - Claude对代理有限制
+   - 对话式ai需要有额外的配置
+   - 未系统学习Nginx
