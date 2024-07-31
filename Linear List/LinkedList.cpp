@@ -4,7 +4,12 @@ using namespace std;
 
 template<class T>
 class LinkedList{
-
+/*
+    @author: 方天宇
+    @date: 2024.07.29 - 2024.07.31
+    @brief: 实现了双向带有头尾结点的链式存储, 并实现了该类的一些基础操作集和进阶操作集(合并, 反转, 是否有环)
+    @todo: 迭代器, 符号重载, Travel函数
+*/
 private:
     // 双向结点, 使迭代器支持双向遍历
     struct Node{ 
@@ -29,16 +34,19 @@ public:
         this->len = 0;
     }
     // 析构函数, 用于释放内存
-    // ~LinkedList(){
-    //     // 没有结点的时候
-    //     if(this->begin){}
-    //     // 有结点的时候
-        
-    // }
+    ~LinkedList(){
+        Node* p = head;
+        while (p){
+            Node* q = p->next;
+            delete p;
+            p = q;
+        }
+    }
 
 public: 
     // 迭代器类的定义, 用于遍历链表, 迭代器是对于指针的再一次封装, 
     // 为外部提供一个统一的访问接口, 在C++的STL库中, 是为了容器和STL算法的兼容
+    // 这里懒得实现迭代器了, 写的有点累了, 点到为止, 不优化了
     
 public: // 操作集 -> base operation
     Node* begin() const {
