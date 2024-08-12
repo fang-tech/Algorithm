@@ -227,7 +227,7 @@ void test_linked_list() {
     while (!isEmpty()) {
         pop_front();
     }
-    for (int i = 0; i < LARGE_N; ++i) {
+    for (int i = 0; i < LARGE_N; ++i) {z
         push_front(i);
         if (i % 50 == 0) {
             cout << "After pushing " << i << " elements: ";

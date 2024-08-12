@@ -1,0 +1,31 @@
+/*
+    @author : 方天宇
+    @date   : 2024/08/11
+    @brief  : 我们往往希望希望双向链表的所有元素在存储器中保持紧凑(伪代码实现)
+*/
+F = STACK   : 内存空间
+F.top()     : 内存空间中下一个可用的位置
+x           : 链表中需要被删除的元素
+p           : 链表中的最后的一个元素的前一个元素
+
+ALLOCATE-OBJECT()
+    if STACK-EMPTY(F)
+        error "out of space"
+    x = F.top()
+    F.POP()
+    return x
+FREE-OBJECT(x)
+    if STACK-FULL(F)
+        error "overflow"
+    p = F.top() - 1
+    if LAST-NODE
+        F.PUSH(p)
+        return
+    x.next.prev = x.prev
+    x.prev.next = x.next
+    x.key = p.key
+    x.next = p.next
+    x.prev = p.prev
+    x.prev.next = x
+    F.PUSH(p)
+    return

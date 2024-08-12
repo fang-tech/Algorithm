@@ -1,0 +1,24 @@
+/*
+    @author : 方天宇
+    @date   : 2024/08/11
+    @brief  : 整定链表一个不紧凑的链表, 使保持紧凑(伪代码实现)
+*/
+COMPACTIFY-LIST(L, F)
+    TRANSPOSE(A[L.head], A[1])
+    if F.head == 1
+        F.head = L.head
+    L.head = 1
+    l = A[L.head].next
+    i = 2
+    while l != NIL
+        TRANSPOSE(A[l], A[i])
+        if F == i
+            F = l
+        l = A[l].next
+        i = i + 1
+
+TRANSPOSE(a, b)
+    SWAP(a.prev.next, b.prev.next)
+    SWAP(a.prev, b.prev)
+    SWAP(a.next.prev, b.next.prev)
+    SWAP(a.next, b.next)
