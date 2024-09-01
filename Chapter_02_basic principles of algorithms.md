@@ -236,5 +236,26 @@
 
 #### 练习
 
+2. 重写MERGE, 放弃哨兵节点, 而是其中一个牌堆清空以后 , 直接将另一个牌堆全部复制上去
 
+   ```python
+   MERGE(A, p, q, r)
+       n1 = q - p + 1
+       n2 = r - q
+       let L[1..n1] and R[1..n2] be new arrays
+   	for i=1 to n1
+       	L[i] = A[i+p-1]
+       for i=1 to n2
+       	R[i] = A[i+q]
+       i = j = 1
+     	for k = p to r
+       	if i <= n1 and (j > n2 or L[i] <= R[j])
+           	A[k] = L[i]
+               i++
+           else 
+           	A[k] = R[j]
+               j++
+   ```
+
+   
 
