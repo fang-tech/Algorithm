@@ -1,3 +1,8 @@
+/**
+ * @anchor  方天宇
+ * @date    2024/10/15
+ * @brief   使用动态"标准"链表实现洛谷P1996
+ */
 #include <bits/stdc++.h>
 
 using namespace std;
