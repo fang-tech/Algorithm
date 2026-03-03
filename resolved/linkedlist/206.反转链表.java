@@ -1,0 +1,45 @@
+/*
+ * @lc app=leetcode.cn id=206 lang=java
+ *
+ * [206] 反转链表
+ */
+
+class ListNode {
+    int val;
+    ListNode next;
+    ListNode() {}
+    ListNode(int val) { this.val = val; }
+    ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+}
+// @lc code=start
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    /**
+     * 三指针, cur是当前要反转的节点
+     * next在反转前移动
+     */
+    public ListNode reverseList(ListNode head) {
+        if (head == null || head.next == null)
+            return head;
+        // prev(-1) cur(0) next(0)
+        ListNode prev = null, cur = head, next = head;
+        while (cur != null) {
+            next = cur.next;
+            cur.next = prev;
+            prev = cur;
+            cur = next;
+        }
+        return prev;
+    }
+}
+// @lc code=end
+
