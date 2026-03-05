@@ -38,6 +38,8 @@
 | [206.反转链表](resolved/linkedlist/206.反转链表.java) | 三指针, cur是当前要反转的节点 next在反转前移动 |
 | [21.合并两个有序链表](resolved/linkedlist/21.合并两个有序链表.java) |  |
 | [25.k-个一组翻转链表](resolved/linkedlist/25.k-个一组翻转链表.java) | 翻转每一段链表, 要有dummy, 找到每段链表翻转前的head, head.prev, last, last.next |
+| [82.删除排序链表中的重复元素-ii](resolved/linkedlist/82.删除排序链表中的重复元素-ii.java) | 如果cur的下两个节点都存在, 并且两个节点的值都相同, 则开始删除和cur.next值相同的节点, 否则cur向前一步 @param head @return |
+| [92.反转链表-ii](resolved/linkedlist/92.反转链表-ii.java) | 创建dummy节点, 记录要反转的区间的前一个节点和下一个节点, 还有反转后的链表的head(prev)和tail(由dummy.next记录) 是按k个反转链表的退阶题目 |
 
 ## sliding_window
 
@@ -55,6 +57,8 @@
 
 | 题目 | 一句话题解 |
 | --- | --- |
+| [165.比较版本号](resolved/string/165.比较版本号.java) | 从版本号中提取数字, 默认是0, 直到两个字符串都匹配完了, 仍然没有找到更大的, 则返回0(循环外) |
+| [415.字符串相加](resolved/string/415.字符串相加.java) |  |
 | [5.最长回文子串](resolved/string/5.最长回文子串.java) | 中心扩散, 分成奇偶回文序列两种情况分别遍历 |
 
 ## structure

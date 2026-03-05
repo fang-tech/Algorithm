@@ -1,0 +1,34 @@
+/*
+ * @lc app=leetcode.cn id=165 lang=java
+ *
+ * [165] 比较版本号
+ */
+
+// @lc code=start
+class Solution {
+    /**
+     * 从版本号中提取数字, 默认是0, 直到两个字符串都匹配完了,
+     * 仍然没有找到更大的, 则返回0(循环外)
+     */
+    public int compareVersion(String version1, String version2) {
+        char[] s1 = version1.toCharArray();
+        char[] s2 = version2.toCharArray();
+        int i1 = 0, i2 = 0;
+        while (i1 < s1.length || i2 < s2.length) {
+            int num1 = 0, num2 = 0;
+            for (; i1 < s1.length && s1[i1] != '.'; i1++) {
+                num1 = (s1[i1] - '0') + num1 * 10;
+            }
+            i1++;
+            for (; i2 < s2.length && s2[i2] != '.'; i2++) {
+                num2 = (s2[i2] - '0') + num2 * 10;
+            }
+            i2++;
+            if (num2 > num1) return -1;
+            else if (num1 > num2) return 1;
+        }
+        return 0;
+    }
+}
+// @lc code=end
+
