@@ -27,8 +27,11 @@
 
 | 题目 | 一句话题解 |
 | --- | --- |
+| [1143.最长公共子序列](resolved/dp/1143.最长公共子序列.java) | dfs(i, j): word1前i个字符和word2前j个字符之间的最长子序列长度 @param text1 @param text2 @return |
 | [300.最长递增子序列](resolved/dp/300.最长递增子序列.java) |  |
 | [53.最大子数组和](resolved/dp/53.最大子数组和.java) | dp, 以这个数字为结尾的最大子数组和 |
+| [72.编辑距离(递归)](resolved/dp/72.编辑距离(递归).java) | 思路和递推版一致, dfs(i,j): word1前i个字符被转化成word2前j个字符需要的最少步数 递归的返回条件分别是记忆化搜索, i/j越界 |
+| [72.编辑距离(递推)](resolved/dp/72.编辑距离(递推).java) | 递推版本: f[i+1][j+1] word1前i+1个字符转化成word2前j+1个字符所需的最小操作数 操作都只对word1操作 插入操作: 插入的字符将j+1给抵消掉了, 所以情况变成了f[i+1][j]+1 删除操作: 删除了一个字符, i+1被删了, f[i][j+1]+1 修改操作: i+1和j+1都被抵消掉了 |
 
 ## linkedlist
 
@@ -58,6 +61,7 @@
 | 题目 | 一句话题解 |
 | --- | --- |
 | [165.比较版本号](resolved/string/165.比较版本号.java) | 从版本号中提取数字, 默认是0, 直到两个字符串都匹配完了, 仍然没有找到更大的, 则返回0(循环外) |
+| [32.最长有效括号](resolved/string/32.最长有效括号.java) | list里面存的是没有匹配的'('的索引, 那么每次匹配的到的时候, 就可以通过(i - 最近的没有匹配到的'('的index), 来计算得到当前的连续括号长度, 初始化的时候stack里面存一个-1来作为哨兵 @param s @return |
 | [415.字符串相加](resolved/string/415.字符串相加.java) |  |
 | [5.最长回文子串](resolved/string/5.最长回文子串.java) | 中心扩散, 分成奇偶回文序列两种情况分别遍历 |
 
@@ -67,6 +71,12 @@
 | --- | --- |
 | [1.两数之和](resolved/structure/1.两数之和.java) | hashmap<num, index> |
 | [146.lru-缓存](resolved/structure/146.lru-缓存.java) | hashmap key: key, val: node node : key, value, prev, next; |
+
+## tree
+
+| 题目 | 一句话题解 |
+| --- | --- |
+| [236.二叉树的最近公共祖先](resolved/tree/236.二叉树的最近公共祖先.java) | 对于树类题目, 状态存储在当前节点的返回值, 递归到每个节点的返回值都是当前节点的值和左子树与右子树的返回 |
 
 ## two_pointers
 
