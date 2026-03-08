@@ -15,6 +15,7 @@
 | 题目 | 一句话题解 |
 | --- | --- |
 | [102.二叉树的层序遍历](resolved/bfs/102.二叉树的层序遍历.java) | 树的bfs, 注意root可能是null |
+| [103.二叉树的锯齿形层序遍历](resolved/bfs/103.二叉树的锯齿形层序遍历.java) | 最简单的思路就是简单的层序遍历 + Collections反转 也可以分成left2righ和right2left两种情况讨论, 让每次切换遍历方向的时候, 也更换push和pop的对应的方向, 还有先left还是先right |
 
 ## dfs
 
@@ -38,6 +39,7 @@
 | 题目 | 一句话题解 |
 | --- | --- |
 | [143.重排链表](resolved/linkedlist/143.重排链表.java) | 获取中间节点, 从中间节点开始反转链表 将两个的链表合并, 需要注意的是两个子链表的末尾都是第二个反转后的链表的tail |
+| [19.删除链表的倒数第-n-个结点](resolved/linkedlist/19.删除链表的倒数第-n-个结点.java) | 两个指针, fast和slow之间相差n个节点, fast到最后一个node的时候, slow在要删除的节点的前一个node, 执行删除 |
 | [206.反转链表](resolved/linkedlist/206.反转链表.java) | 三指针, cur是当前要反转的节点 next在反转前移动 |
 | [21.合并两个有序链表](resolved/linkedlist/21.合并两个有序链表.java) |  |
 | [25.k-个一组翻转链表](resolved/linkedlist/25.k-个一组翻转链表.java) | 翻转每一段链表, 要有dummy, 找到每段链表翻转前的head, head.prev, last, last.next |
@@ -63,7 +65,9 @@
 | [165.比较版本号](resolved/string/165.比较版本号.java) | 从版本号中提取数字, 默认是0, 直到两个字符串都匹配完了, 仍然没有找到更大的, 则返回0(循环外) |
 | [32.最长有效括号](resolved/string/32.最长有效括号.java) | list里面存的是没有匹配的'('的索引, 那么每次匹配的到的时候, 就可以通过(i - 最近的没有匹配到的'('的index), 来计算得到当前的连续括号长度, 初始化的时候stack里面存一个-1来作为哨兵 @param s @return |
 | [415.字符串相加](resolved/string/415.字符串相加.java) |  |
+| [43.字符串相乘](resolved/string/43.字符串相乘.java) |  |
 | [5.最长回文子串](resolved/string/5.最长回文子串.java) | 中心扩散, 分成奇偶回文序列两种情况分别遍历 |
+| [93.复原-ip-地址](resolved/string/93.复原-ip-地址.java) | 递归回溯在i位置分割还是不分割, 最后一个节点一定要分割, 有前导0不能不分割 @param s @return |
 
 ## structure
 
