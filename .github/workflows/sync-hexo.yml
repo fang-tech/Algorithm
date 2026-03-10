@@ -1,0 +1,62 @@
+name: Sync Algorithm to Hexo Blog
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'resolved/**'
+      - 'hexo_publisher.py'
+  workflow_dispatch:
+
+jobs:
+  sync-algorithm-notes:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout source repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0 # 需要全量历史以获取首次提交时间
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+
+    - name: Generate Hexo Markdown files
+      run: |
+        python hexo_publisher.py
+
+    - name: Setup Git
+      run: |
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+    - name: Checkout Hexo-Blog repository
+      uses: actions/checkout@v4
+      with:
+        repository: fang-tech/Hexo-Blog # 替换为你真实的 Hexo 仓库路径，当前基于你的 Knowledge workflow 推断
+        token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        path: hexo-blog
+        fetch-depth: 0
+
+    - name: Copy algorithm notes to hexo blog
+      run: |
+        # 为 algorithm 建立专门的存放目录
+        mkdir -p hexo-blog/source/_posts/algorithm
+
+        # 同步转换好的 md 文件到 hexo-blog 的 source/_posts/algorithm/
+        rsync -av --delete --checksum .hexo_dist/ hexo-blog/source/_posts/algorithm/
+
+        cd hexo-blog
+
+        if [[ -n $(git status --porcelain) ]]; then
+          echo "检测到算法题目更新，准备提交..."
+          git add source/_posts/algorithm/
+          git commit -m "Auto sync algorithm posts from algorithm repo - $(date '+%Y-%m-%d %H:%M:%S')"
+          git push origin main
+          echo "同步完成"
+        else
+          echo "没有检测到更新内容"
+        fi
