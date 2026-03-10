@@ -62,9 +62,14 @@ def extract_oneliner(content: str) -> str:
 def main():
     base_dir = os.path.dirname(os.path.abspath(__file__))
     resolved_dir = os.path.join(base_dir, 'resolved')
-    output_dir = os.path.join(base_dir, '.hexo_dist')
     
-    os.makedirs(output_dir, exist_ok=True)
+    # 拆分为 pages（普通页面，不显示在主页）和 posts（博文，显示在主页）
+    output_dir = os.path.join(base_dir, '.hexo_dist')
+    pages_dir = os.path.join(output_dir, 'pages')
+    posts_dir = os.path.join(output_dir, 'posts')
+    
+    os.makedirs(pages_dir, exist_ok=True)
+    os.makedirs(posts_dir, exist_ok=True)
     
     index_links = {}
     
@@ -88,11 +93,13 @@ def main():
             date_str = get_git_creation_date(filepath)
             updated_str = get_git_update_date(filepath)
             
-            # 生成 Markdown 文本
+            # 每道题生成为 page 而非 post，不在主页乱刷屏，而且强制指定 permalink 路径
             md_content = f"""---
 title: {title}
 date: {date_str}
 updated: {updated_str}
+layout: page
+permalink: /algorithm/{title}/
 categories:
   - 算法
   - {category}
@@ -108,9 +115,9 @@ tags:
 {cleaned_code}
 ```
 """
-            # 写入 md 文件
+            # 写入到 pages_dir
             md_filename = f"{title}.md"
-            md_filepath = os.path.join(output_dir, md_filename)
+            md_filepath = os.path.join(pages_dir, md_filename)
             with open(md_filepath, 'w', encoding='utf-8') as f:
                 f.write(md_content)
                 
@@ -118,7 +125,7 @@ tags:
                 index_links[category] = []
             index_links[category].append(title)
             
-    # 生成索引页
+    # 生成主页展示的索引文章
     index_content = [
         "---",
         "title: 算法刷题目录",
@@ -134,11 +141,12 @@ tags:
     for category in sorted(index_links.keys()):
         index_content.append(f"## {category}")
         for title in sorted(index_links[category]):
-            # Hexo 的 post_link 语法
-            index_content.append(f"* {title}: {{% post_link {title} %}}")
+            # 改为使用标准的相对路径 markdown 链接跳转
+            index_content.append(f"* [{title}](/algorithm/{title}/)")
         index_content.append("")
         
-    index_filepath = os.path.join(output_dir, "Algorithm-Index.md")
+    # 索引文章写入到 posts_dir，这样只有这篇会作为 Post 发到博客
+    index_filepath = os.path.join(posts_dir, "Algorithm-Index.md")
     with open(index_filepath, 'w', encoding='utf-8') as f:
         f.write('\n'.join(index_content))
         

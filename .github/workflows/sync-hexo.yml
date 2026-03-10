@@ -43,19 +43,24 @@ jobs:
 
     - name: Copy algorithm notes to hexo blog
       run: |
-        # 为 algorithm 建立专门的存放目录
+        # 为具体的算法解题页面建立独立存放目录（放在 source/ 即 Hexo Pages 的范畴，因此不在主页显示）
+        mkdir -p hexo-blog/source/algorithm
+
+        # 为算法索引文章（真正在首页显示的文章）建立存放目录
         mkdir -p hexo-blog/source/_posts/algorithm
 
-        # 同步转换好的 md 文件到 hexo-blog 的 source/_posts/algorithm/
-        rsync -av --delete --checksum .hexo_dist/ hexo-blog/source/_posts/algorithm/
+        # 同步 pages 生成的所有 md 到 hexo-blog 的 source/algorithm/ 
+        rsync -av --delete --checksum .hexo_dist/pages/ hexo-blog/source/algorithm/
+
+        # 同步帖子 Algorithm-Index 到 hexo-blog 的 source/_posts/algorithm/
+        # 注意此处的 --delete 参数会非常完美地把之前误推送到这里的那些数百个刷屏的文章全部清理掉！
+        rsync -av --delete --checksum .hexo_dist/posts/ hexo-blog/source/_posts/algorithm/
 
         cd hexo-blog
-
+        
         if [[ -n $(git status --porcelain) ]]; then
           echo "检测到算法题目更新，准备提交..."
-          git add source/_posts/algorithm/
-          git commit -m "Auto sync algorithm posts from algorithm repo - $(date '+%Y-%m-%d %H:%M:%S')"
-          git push origin main
+          git add source/algorithm/ source/_posts/algorithm/
           echo "同步完成"
         else
           echo "没有检测到更新内容"
