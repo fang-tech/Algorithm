@@ -61,6 +61,8 @@ jobs:
         if [[ -n $(git status --porcelain) ]]; then
           echo "检测到算法题目更新，准备提交..."
           git add source/algorithm/ source/_posts/algorithm/
+          git commit -m "Auto sync algorithm posts from algorithm repo - $(date '+%Y-%m-%d %H:%M:%S')"
+          git push origin main
           echo "同步完成"
         else
           echo "没有检测到更新内容"
