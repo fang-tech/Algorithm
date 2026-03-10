@@ -6,7 +6,6 @@ from datetime import datetime
 def get_git_creation_date(filepath: str) -> str:
     """获取文件的首次提交时间，用作Hexo文章的发布时间"""
     try:
-        # 使用 git log 查找文件的第一次提交时间
         result = subprocess.run(
             ['git', 'log', '--diff-filter=A', '--format=%cI', '-1', '--', filepath],
             capture_output=True, text=True, check=True
@@ -19,41 +18,29 @@ def get_git_creation_date(filepath: str) -> str:
     # fallback to current time
     return datetime.now().strftime('%Y-%m-%dT%H:%M:%S+08:00')
 
+def get_git_update_date(filepath: str) -> str:
+    """获取文件的最后一次提交时间，用作Hexo文章的更新时间"""
+    try:
+        result = subprocess.run(
+            ['git', 'log', '--format=%cI', '-1', '--', filepath],
+            capture_output=True, text=True, check=True
+        )
+        date_str = result.stdout.strip()
+        if date_str:
+            return date_str
+    except Exception:
+        pass
+    return datetime.now().strftime('%Y-%m-%dT%H:%M:%S+08:00')
+
 def clean_java_content(content: str) -> str:
-    """清除 LeetCode 插件相关的干扰信息"""
-    lines = content.splitlines()
-    cleaned_lines = []
-    skip_mode = False
-    
-    for line in lines:
-        # 跳过 package
-        if line.strip().startswith('package '):
-            continue
-        # 跳过 /* @lc ... */  (有可能占多行，这里简单处理基于 @lc 的单行或代码块)
-        if '@lc app=leetcode' in line:
-            skip_mode = True
-            continue
-        if skip_mode and '*/' in line:
-            skip_mode = False
-            continue
-        if skip_mode:
-            continue
-            
-        # 跳过 // @lc code=start 和 // @lc code=end
-        if '// @lc code=start' in line or '// @lc code=end' in line:
-            continue
-            
-        # 跳过 [121] XXX 这样的注释头
-        if re.match(r'^ \* \[\d+\].+', line.strip()):
-            continue
-            
-        cleaned_lines.append(line)
-        
-    # 去除开头的空行
-    while cleaned_lines and not cleaned_lines[0].strip():
-        cleaned_lines.pop(0)
-        
-    return '\n'.join(cleaned_lines)
+    """清除 LeetCode 插件相关的干扰信息，使用正则只抓取所有的类定义以及类里面的成员"""
+    match = re.search(r'(class\s+\w+\s*\{.*)', content, re.DOTALL)
+    if match:
+        code = match.group(1)
+        # 移除末尾可能存在的 LeetCode 结束标记
+        code = re.sub(r'//\s*@lc\s+code=end\s*$', '', code).strip()
+        return code
+    return content.strip()
 
 def extract_oneliner(content: str) -> str:
     """从原始内容中提取一句话题解"""
@@ -99,11 +86,13 @@ def main():
             hint = extract_oneliner(content)
             cleaned_code = clean_java_content(content)
             date_str = get_git_creation_date(filepath)
+            updated_str = get_git_update_date(filepath)
             
             # 生成 Markdown 文本
             md_content = f"""---
 title: {title}
 date: {date_str}
+updated: {updated_str}
 categories:
   - 算法
   - {category}
