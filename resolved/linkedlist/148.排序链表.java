@@ -1,0 +1,81 @@
+package resolved.linkedlist;
+/*
+ * @lc app=leetcode.cn id=148 lang=java
+ *
+ * [148] 排序链表
+ */
+
+class ListNode {
+    int val;
+    ListNode next;
+    ListNode() {}
+    ListNode(int val) { this.val = val; }
+    ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+}
+// @lc code=start
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    /**
+     * 链表版本归并排序, 外层sortfindmiddle, 切分链表,
+     * 然后partitionMerge合并两个链表
+     */
+    public ListNode sortList(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode head2 = findMiddle(head);
+        ListNode left = sortList(head);
+        ListNode right = sortList(head2);
+        return partitionMerge(left, right);
+    }
+
+    private ListNode partitionMerge(ListNode head1, ListNode head2) {
+        ListNode dummy = new ListNode();
+        ListNode cur = dummy;
+        while (head1 != null && head2 != null) {
+            if (head1.val > head2.val) {
+                cur.next = head2;
+                head2 = head2.next;
+                cur = cur.next;
+            } else {
+                cur.next = head1;
+                head1 = head1.next;
+                cur = cur.next;
+            }
+        }
+
+        if (head1 != null) {
+            cur.next = head1;
+        } else if (head2 != null) {
+            cur.next = head2;
+        }
+
+        return dummy.next;
+    }
+
+    /**
+     * 将链表从中间拆分成两个链表 (至少有两个节点)
+     */
+    private ListNode findMiddle(ListNode head) {
+        ListNode dummy = new ListNode(0 , head);
+        ListNode slow = dummy, fast = dummy;
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        ListNode nxt = slow.next;
+        slow.next = null;
+        return nxt;
+    }
+}
+// @lc code=end
+

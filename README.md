@@ -24,6 +24,7 @@
 | --- | --- |
 | [34.在排序数组中查找元素的第一个和最后一个位置](resolved/binary_search/34.在排序数组中查找元素的第一个和最后一个位置.java) | 二分搜索, 分别找到第一个 >= target的元素, 和 >= target + 1的元素, 边界条件: 这个元素不存在于数组中, 或者所有的元素都 < target, 导致lower_bound返回nums.length @param nums @param target @return |
 | [4.寻找两个正序数组的中位数](resolved/binary_search/4.寻找两个正序数组的中位数.java) | 需要重温 |
+| [69.x-的平方根](resolved/binary_search/69.x-的平方根.java) | 二分查找, 注意不能计算mid^2会导致越界, left在开区间的情况下应该从0开始 |
 
 ## dfs
 
@@ -32,6 +33,7 @@
 | [200.岛屿数量](resolved/dfs/200.岛屿数量.java) | dfs只用来标记是不是已经访问过了, 遍历所有的节点, 不要使用MAP, 所有的返回条件都放在递归结束的位置做 |
 | [22.括号生成](resolved/dfs/22.括号生成.java) | 选左括号还是右括号, 只有右括号的剩余数量大于左括号的剩余数量才能选 |
 | [46.全排列](resolved/dfs/46.全排列.java) | 每个槽位可以选什么数字, dfs, 记录哪个数字用过了 |
+| [695.岛屿的最大面积](resolved/dfs/695.岛屿的最大面积.java) | dfs遍历, dfs返回值是以当前坐标为起点的连通陆地面积 |
 
 ## dp
 
@@ -53,6 +55,7 @@
 | --- | --- |
 | [141.环形链表](resolved/linkedlist/141.环形链表.java) | 快慢指针, 重合即是有环 |
 | [143.重排链表](resolved/linkedlist/143.重排链表.java) | 获取中间节点, 从中间节点开始反转链表 将两个的链表合并, 需要注意的是两个子链表的末尾都是第二个反转后的链表的tail |
+| [148.排序链表](resolved/linkedlist/148.排序链表.java) | 链表版本归并排序, 外层sortfindmiddle, 切分链表, 然后partitionMerge合并两个链表 |
 | [19.删除链表的倒数第-n-个结点](resolved/linkedlist/19.删除链表的倒数第-n-个结点.java) | 两个指针, fast和slow之间相差n个节点, fast到最后一个node的时候, slow在要删除的节点的前一个node, 执行删除 |
 | [206.反转链表](resolved/linkedlist/206.反转链表.java) | 三指针, cur是当前要反转的节点 next在反转前移动 |
 | [21.合并两个有序链表](resolved/linkedlist/21.合并两个有序链表.java) |  |
@@ -80,6 +83,7 @@
 | --- | --- |
 | [165.比较版本号](resolved/string/165.比较版本号.java) | 从版本号中提取数字, 默认是0, 直到两个字符串都匹配完了, 仍然没有找到更大的, 则返回0(循环外) |
 | [32.最长有效括号](resolved/string/32.最长有效括号.java) | list里面存的是没有匹配的'('的索引, 那么每次匹配的到的时候, 就可以通过(i - 最近的没有匹配到的'('的index), 来计算得到当前的连续括号长度, 初始化的时候stack里面存一个-1来作为哨兵 @param s @return |
+| [394.字符串解码](resolved/string/394.字符串解码.java) | 在碰到']'的处理整个模式, 数字的处理, 这里是反序的, 是不是正序读, 要通过位数计算当前数字要乘的10^x, 注意反转 |
 | [415.字符串相加](resolved/string/415.字符串相加.java) |  |
 | [43.字符串相乘](resolved/string/43.字符串相乘.java) |  |
 | [5.最长回文子串](resolved/string/5.最长回文子串.java) | 中心扩散, 分成奇偶回文序列两种情况分别遍历 |
