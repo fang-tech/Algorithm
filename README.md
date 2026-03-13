@@ -8,6 +8,7 @@
 | [215.数组中的第k个最大元素](resolved/array/215.数组中的第k个最大元素.java) |  |
 | [54.螺旋矩阵](resolved/array/54.螺旋矩阵.java) | 发现横向和纵向在各自的方向上, 每轮走的步数--, 需要注意起点在(0, -1) |
 | [56.合并区间](resolved/array/56.合并区间.java) | 按照第一个数字升序排序, 然后合 |
+| [560.和为-k-的子数组](resolved/array/560.和为-k-的子数组.java) | **前缀和 + 枚举**</br> 计算[left, right]子数组和==k的问题能转化成s[right] -s[left] == k的前缀和问题 即计算s[right] - s[left] == k的数量, 这就变成了一个两数之和的问题了. hashmap: key -> right前面的前缀和值 value -> 出现的次数, 要注意等于key==0的边界情况 |
 | [88.合并两个有序数组](resolved/array/88.合并两个有序数组.java) | 从后往前排, 和合并链表一样的思路, 不过这里nums1剩下的时候可以不用再合并了 |
 | [912.排序数组](resolved/array/912.排序数组.java) |  |
 
@@ -40,6 +41,7 @@
 | 题目 | 一句话题解 |
 | --- | --- |
 | [1143.最长公共子序列](resolved/dp/1143.最长公共子序列.java) | dfs(i, j): word1前i个字符和word2前j个字符之间的最长子序列长度 @param text1 @param text2 @return |
+| [122.买卖股票的最佳时机-ii](resolved/dp/122.买卖股票的最佳时机-ii.java) | dfs(i, hold) return int 如果要持有股票, 则最大利润为max(dfs(i-1, 1), dfs(i-1, 0) - prices[i]) 如果要不持有股票, 则最大利润为max(dfs(i-1, 0), dfs(i-1, 0) + prices[i]) |
 | [300.最长递增子序列](resolved/dp/300.最长递增子序列.java) |  |
 | [322.零钱兑换(递归)](resolved/dp/322.零钱兑换(递归).java) | DFS 状态定义：dfs(i, j) 表示仅使用前 i 种硬币（下标范围 [0...i]）， 刚好凑出总金额为 j 时，所需要的最少硬币数量。 对于第 i 种硬币，我们可以： 1. 不选它：直接看前 i-1 种硬币，状态转移为 dfs(i-1, j) 2. 选它：因为硬币数量无限，我们还可以继续选第 i 种硬币（下标 i 不变），状态转移为 dfs(i, j - coins[i]) + 1 |
 | [322.零钱兑换(递推)](resolved/dp/322.零钱兑换(递推).java) |  |
@@ -94,7 +96,9 @@
 | 题目 | 一句话题解 |
 | --- | --- |
 | [1.两数之和](resolved/structure/1.两数之和.java) | hashmap<num, index> |
+| [128.最长连续序列](resolved/structure/128.最长连续序列.java) | 将元素都存储到集合里面, 遍历集合里面的元素, 如果这个元素是序列的起点(num-1不在set中), 则向后找后续的序列 |
 | [146.lru-缓存](resolved/structure/146.lru-缓存.java) | hashmap key: key, val: node node : key, value, prev, next; |
+| [232.用栈实现队列](resolved/structure/232.用栈实现队列.java) | 维护一个enque队列和deque队列, 在要deque/peek的时候, 如果deque empty, 则把enque中的元素都倒到deque @param x |
 
 ## tree
 
