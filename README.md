@@ -58,12 +58,20 @@
 | [141.环形链表](resolved/linkedlist/141.环形链表.java) | 快慢指针, 重合即是有环 |
 | [143.重排链表](resolved/linkedlist/143.重排链表.java) | 获取中间节点, 从中间节点开始反转链表 将两个的链表合并, 需要注意的是两个子链表的末尾都是第二个反转后的链表的tail |
 | [148.排序链表](resolved/linkedlist/148.排序链表.java) | 链表版本归并排序, 外层sortfindmiddle, 切分链表, 然后partitionMerge合并两个链表 |
+| [160.相交链表](resolved/linkedlist/160.相交链表.java) | 假设A自己私有的部分长度是m, B是n, 公用的部分是x, (m < n) 通过A, B同时向前走, A走完的时候, B停在离终点还有n - m步骤, 这个时候再让B head n-m步, 这个时候, 两个链表向前走一起向前走m步就会相遇, 也就是一起向前走就会相遇 |
 | [19.删除链表的倒数第-n-个结点](resolved/linkedlist/19.删除链表的倒数第-n-个结点.java) | 两个指针, fast和slow之间相差n个节点, fast到最后一个node的时候, slow在要删除的节点的前一个node, 执行删除 |
 | [206.反转链表](resolved/linkedlist/206.反转链表.java) | 三指针, cur是当前要反转的节点 next在反转前移动 |
 | [21.合并两个有序链表](resolved/linkedlist/21.合并两个有序链表.java) |  |
+| [234.回文链表](resolved/linkedlist/234.回文链表.java) | 找到中点前一个节点, 然后反转后一部分, 最后比较, 出现不同return false |
 | [25.k-个一组翻转链表](resolved/linkedlist/25.k-个一组翻转链表.java) | 翻转每一段链表, 要有dummy, 找到每段链表翻转前的head, head.prev, last, last.next |
 | [82.删除排序链表中的重复元素-ii](resolved/linkedlist/82.删除排序链表中的重复元素-ii.java) | 如果cur的下两个节点都存在, 并且两个节点的值都相同, 则开始删除和cur.next值相同的节点, 否则cur向前一步 @param head @return |
 | [92.反转链表-ii](resolved/linkedlist/92.反转链表-ii.java) | 创建dummy节点, 记录要反转的区间的前一个节点和下一个节点, 还有反转后的链表的head(prev)和tail(由dummy.next记录) 是按k个反转链表的退阶题目 |
+
+## math
+
+| 题目 | 一句话题解 |
+| --- | --- |
+| [470.用-rand-7-实现-rand-10](resolved/math/470.用-rand-7-实现-rand-10.java) | The rand7() API is already defined in the parent class SolBase. public int rand7(); @return a random integer in the range 1 to 7 |
 
 ## sliding_window
 
@@ -84,6 +92,7 @@
 | 题目 | 一句话题解 |
 | --- | --- |
 | [165.比较版本号](resolved/string/165.比较版本号.java) | 从版本号中提取数字, 默认是0, 直到两个字符串都匹配完了, 仍然没有找到更大的, 则返回0(循环外) |
+| [179.最大数](resolved/string/179.最大数.java) | 两层遍历, 形似插入排序, 每次找到能最大化添加的数字append到ans里面 |
 | [32.最长有效括号](resolved/string/32.最长有效括号.java) | list里面存的是没有匹配的'('的索引, 那么每次匹配的到的时候, 就可以通过(i - 最近的没有匹配到的'('的index), 来计算得到当前的连续括号长度, 初始化的时候stack里面存一个-1来作为哨兵 @param s @return |
 | [394.字符串解码](resolved/string/394.字符串解码.java) | 在碰到']'的处理整个模式, 数字的处理, 这里是反序的, 是不是正序读, 要通过位数计算当前数字要乘的10^x, 注意反转 |
 | [415.字符串相加](resolved/string/415.字符串相加.java) |  |

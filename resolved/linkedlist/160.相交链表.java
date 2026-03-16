@@ -1,0 +1,63 @@
+package resolved.linkedlist;
+/*
+ * @lc app=leetcode.cn id=160 lang=java
+ *
+ * [160] 相交链表
+ */
+
+class ListNode {
+    int val;
+    ListNode next;
+    ListNode(int x) {
+        val = x;
+        next = null;
+    }
+}
+// @lc code=start
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+class Solution {
+    /**
+     * 假设A自己私有的部分长度是m, B是n, 公用的部分是x, (m < n)
+     * 通过A, B同时向前走, A走完的时候,
+     * B停在离终点还有n - m步骤,
+     * 这个时候再让B head n-m步, 这个时候,
+     * 两个链表向前走一起向前走m步就会相遇, 也就是一起向前走就会相遇
+     */
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        ListNode h1 = headA, h2 = headB;
+        while (h1 != null && h2 != null) {
+            h1 = h1.next;
+            h2 = h2.next;
+        }
+        if (h2 == null) {
+            ListNode tmp = headA;
+            headA = headB;
+            headB = tmp;
+        }
+        ListNode p = h1 != null ? h1 : h2;
+        while (p != null) {
+            p = p.next;
+            headB = headB.next;
+        }
+        while (headA != null && headB != null) {
+            if (headA == headB) {
+                return headA;
+            }
+            headA = headA.next;
+            headB = headB.next;
+        }
+        return null;
+    }
+}
+// @lc code=end
+
