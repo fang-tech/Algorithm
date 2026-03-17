@@ -1,0 +1,75 @@
+/*
+ * @lc app=leetcode.cn id=662 lang=java
+ *
+ * [662] 二叉树最大宽度
+ */
+
+import java.util.ArrayDeque;
+import java.util.Deque;
+
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+    TreeNode() {}
+    TreeNode(int val) { this.val = val; }
+    TreeNode(int val, TreeNode left, TreeNode right) {
+        this.val = val;
+        this.left = left;
+        this.right = right;
+    }
+}
+// @lc code=start
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    /**
+     * 维护两个队列, 一个是node, 一个是这个node在一个完全二叉树中的位置,
+     * 每层记录最左边的节点和最右边的节点的位置, 计算ans
+     */
+    public int widthOfBinaryTree(TreeNode root) {
+        if (root.left == null && root.right == null) return 1;
+        int ans = 0;
+        Deque<TreeNode> que = new ArrayDeque<>();
+        Deque<Integer> pos = new ArrayDeque<>();
+        que.addLast(root);
+        pos.addLast(1);
+        while (!que.isEmpty()) {
+            int size = que.size();
+            int left = -1;
+            int right = -1;
+            for (int i = 0; i < size; i++) {
+                TreeNode node = que.removeFirst();
+                int p = pos.removeFirst();
+                if (node.left != null) {
+                    que.add(node.left);
+                    pos.add(p*2+1);
+                }
+                if (node.right != null) {
+                    que.add(node.right);
+                    pos.add(p*2+2);
+                }
+                if (left == -1) left = p;
+                right = p;
+
+            }
+            ans = Math.max(ans, right - left + 1);
+        }
+        return ans;
+    }
+}
+// @lc code=end
+

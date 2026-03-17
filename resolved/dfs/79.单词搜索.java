@@ -1,0 +1,56 @@
+/*
+ * @lc app=leetcode.cn id=79 lang=java
+ *
+ * [79] 单词搜索
+ */
+
+// @lc code=start
+class Solution {
+    private String word;
+    private char[][] board;
+
+    /**
+     * 岛屿搜索
+     */
+    public boolean exist(char[][] board, String word) {
+        boolean ans = false;
+        int m = board.length;
+        int n = board[0].length;
+        this.word = word;
+        this.board = board;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (board[i][j] == word.charAt(0)) {
+                    ans |= dfs(0, i, j, new char[word.length()]);
+                }
+            }
+        }
+
+        return ans;
+    }
+
+    private boolean dfs(int i ,int x, int y, char[] path) {
+        if (i == word.length()) {
+            return true;
+        }
+        int m = board.length;
+        int n = board[0].length;
+        if (x >= m || x < 0 || y >= n || y < 0 || board[x][y] == '0') {
+            return false;
+        }
+        char ch = board[x][y];
+        if (ch != word.charAt(i)) return false;
+        board[x][y] = '0';
+        path[i] = ch;
+        boolean ans = false;
+        ans |= dfs(i+1, x+1, y, path);
+        ans |= dfs(i+1, x-1, y, path);
+        ans |= dfs(i+1, x, y+1, path);
+        ans |= dfs(i+1, x, y-1, path);
+        board[x][y] = ch;
+        return ans;
+    }
+
+}
+// @lc code=end
+
