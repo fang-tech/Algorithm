@@ -1,0 +1,56 @@
+package resolved.graph;
+/*
+ * @lc app=leetcode.cn id=207 lang=java
+ *
+ * [207] 课程表
+ */
+
+// @lc code=start
+
+import java.util.ArrayList;
+import java.util.List;
+
+class Solution {
+    /**
+     * 题目转化成了, 图中有没有环, 如果有环, 说明就无法上完课,
+     * 这里还可以通过记忆化递归, 记忆好某个节点是不是已经确定了不会有环出现了
+     */
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        List<List<Integer>> graph = new ArrayList<>(numCourses);
+        for (int i = 0; i < numCourses; i++) {
+            graph.add(new ArrayList<>());
+        }
+        for (int[] row : prerequisites) {
+            int re = row[0];
+            int cl = row[1];
+            graph.get(cl).add(re);
+        }
+        // color == 0: 没有访问过
+        // color == 1: 该节点在这次遍历中访问过
+        // color == 2: 该节点出发, 不会有环
+        int[] color = new int[numCourses];
+        for (int i = 0; i < numCourses; i++) {
+            if (color[i] == 0 && hasCircle(graph, i, color)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean hasCircle(List<List<Integer>> graph, int course, int[] color) {
+        List<Integer> requires = graph.get(course);
+        if (requires.size() == 0) return false;
+        if (color[course] == 1) return true;
+        if (color[course] == 2) return false;
+        color[course] = 1;
+        for (Integer re : requires) {
+            if (hasCircle(graph, re, color)) {
+                return true;
+            }
+        }
+        color[course] = 2;
+        return false;
+    }
+}
+// @lc code=end
+
