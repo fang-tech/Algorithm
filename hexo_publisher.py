@@ -138,6 +138,16 @@ tags:
         ""
     ]
     
+    total_count = sum(len(items) for items in index_links.values())
+    index_content.append("## 题目统计")
+    index_content.append("| 分类 | 数量 | 占比 |")
+    index_content.append("| --- | --- | --- |")
+    for category in sorted(index_links.keys()):
+        count = len(index_links[category])
+        percentage = (count / total_count * 100) if total_count > 0 else 0
+        index_content.append(f"| **{category}** | {count} | {percentage:.2f}% |")
+    index_content.append("")
+
     for category in sorted(index_links.keys()):
         index_content.append(f"## {category}")
         for title in sorted(index_links[category]):

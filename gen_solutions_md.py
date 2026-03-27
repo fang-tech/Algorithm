@@ -83,6 +83,17 @@ def scan_resolved(base_dir: str):
 
 def generate_md(categories: dict, output_path: str, base_dir: str):
     lines = ["# Algorithm Solutions\n"]
+    
+    total_count = sum(len(items) for items in categories.values())
+    lines.append("## 题目统计\n")
+    lines.append("| 分类 | 数量 | 占比 |")
+    lines.append("| --- | --- | --- |")
+    for category, items in sorted(categories.items()):
+        count = len(items)
+        percentage = (count / total_count * 100) if total_count > 0 else 0
+        lines.append(f"| **{category}** | {count} | {percentage:.2f}% |")
+    lines.append("\n")
+
     for category, items in sorted(categories.items()):
         lines.append(f"## {category}\n")
         lines.append("| 题目 | 一句话题解 |")
