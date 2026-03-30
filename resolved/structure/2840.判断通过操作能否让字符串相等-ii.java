@@ -1,0 +1,38 @@
+package resolved.structure;
+/*
+ * @lc app=leetcode.cn id=2840 lang=java
+ *
+ * [2840] 判断通过操作能否让字符串相等 II
+ */
+
+// @lc code=start
+
+class Solution {
+    /**
+     * 问题条件说明数组内部的奇数位置之间, 偶数位置之间可以随意转换,
+     * 所以我们只需要计算奇数位置两个字符串, 偶数字符两个字符串的每个字母的数量是不是一样的
+     */
+    public boolean checkStrings(String s1, String s2) {
+        var c1 = s1.toCharArray();
+        var c2 = s2.toCharArray();
+        var cnt1 = new int['z'+1][2];
+        var cnt2 = new int['z'+1][2];
+        int len = s1.length();
+        for (int i = 0; i < len; i+=2) {
+            cnt1[c1[i]][0]++;
+            cnt2[c2[i]][0]++;
+        }
+        for (int i = 1; i < len; i+=2) {
+            cnt1[c1[i]][1]++;
+            cnt2[c2[i]][1]++;
+        }
+        for (int i = 'a'; i <= 'z'; i++) {
+            if (cnt1[i][0] != cnt2[i][0] || cnt1[i][1] != cnt2[i][1]) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+// @lc code=end
+ //"muwldensgdbsuoajvvxxfqubtputuqmwgwjnbqxomfapjomgptesiummyzqqnweyskoiqa" \n"dtwivvpoakmpgujsmnnetoywnsqlotuamzbjdwmxgfeqxqmwjmbxeouyipssubagqqfquu"

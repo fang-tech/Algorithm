@@ -4,21 +4,21 @@
 
 | 分类 | 数量 | 占比 |
 | --- | --- | --- |
-| **array** | 13 | 15.29% |
-| **bfs** | 2 | 2.35% |
-| **binary_search** | 3 | 3.53% |
-| **dfs** | 7 | 8.24% |
-| **dp** | 17 | 20.00% |
-| **graph** | 1 | 1.18% |
-| **greedy** | 1 | 1.18% |
-| **linkedlist** | 14 | 16.47% |
-| **math** | 1 | 1.18% |
-| **sliding_window** | 4 | 4.71% |
-| **stack** | 1 | 1.18% |
-| **string** | 10 | 11.76% |
-| **structure** | 4 | 4.71% |
-| **tree** | 4 | 4.71% |
-| **two_pointers** | 3 | 3.53% |
+| **array** | 13 | 15.12% |
+| **bfs** | 2 | 2.33% |
+| **binary_search** | 3 | 3.49% |
+| **dfs** | 7 | 8.14% |
+| **dp** | 17 | 19.77% |
+| **graph** | 1 | 1.16% |
+| **greedy** | 1 | 1.16% |
+| **linkedlist** | 14 | 16.28% |
+| **math** | 1 | 1.16% |
+| **sliding_window** | 4 | 4.65% |
+| **stack** | 1 | 1.16% |
+| **string** | 10 | 11.63% |
+| **structure** | 5 | 5.81% |
+| **tree** | 4 | 4.65% |
+| **two_pointers** | 3 | 3.49% |
 
 
 ## array
@@ -163,6 +163,7 @@
 | [128.最长连续序列](resolved/structure/128.最长连续序列.java) | 将元素都存储到集合里面, 遍历集合里面的元素, 如果这个元素是序列的起点(num-1不在set中), 则向后找后续的序列 |
 | [146.lru-缓存](resolved/structure/146.lru-缓存.java) | hashmap key: key, val: node node : key, value, prev, next; |
 | [232.用栈实现队列](resolved/structure/232.用栈实现队列.java) | 维护一个enque队列和deque队列, 在要deque/peek的时候, 如果deque empty, 则把enque中的元素都倒到deque @param x |
+| [2840.判断通过操作能否让字符串相等-ii](resolved/structure/2840.判断通过操作能否让字符串相等-ii.java) | 问题条件说明数组内部的奇数位置之间, 偶数位置之间可以随意转换, 所以我们只需要计算奇数位置两个字符串, 偶数字符两个字符串的每个字母的数量是不是一样的 |
 
 ## tree
 
